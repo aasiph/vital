@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import './tailwind.css';
+@import './variables.css';
+@import './core.css';
+@import './layout.css';
+
+.bg-hero {
+    --c1: var(--p-primary-50);
+    --c2: var(--p-primary-100);
+    --c3: var(--p-primary-200);
+
+    @variant dark {
+        --c1: var(--p-primary-800);
+        --c2: var(--p-primary-700);
+        --c3: var(--p-primary-600);
+    }
+
+    /*background: conic-gradient(at top, var(--c3), var(--c2), var(--c1), var(--c2), var(--c3));*/
+    background: radial-gradient(125% 125% at 50% 90%, #fff 40%, var(--c1) 100%);
+}
+
+.label-class {
+    @apply block max-w-max text-sm font-bold;
+}
+
+.card {
+    @apply bg-primary-contrast rounded-md p-[2rem];
+}
+
+.foot-links {
+    @apply text-surface-500 dark:text-surface-400 hover:text-primary transition;
+}
+
+.text-muted {
+    color: var(--p-text-muted-color);
+}
+
+.landing-service-card {
+    @apply dark:shadow-surface-700 !text-surface-600 dark:!text-surface-400 overflow-hidden !shadow-md transition md:hover:scale-105;
+
+    .p-card-title {
+        @apply !text-surface-800 dark:!text-surface-200;
+    }
+}
+
+.landing-nav {
+    --nav-hover-color: var(--p-primary-800);
+    @variant dark {
+        --nav-hover-color: var(--p-primary-400);
+    }
+
+    .active-nav {
+        @apply relative after:absolute after:bottom-0 after:left-0 after:h-1 after:w-full after:bg-(--nav-hover-color) after:transition-all after:duration-300;
+    }
+
+    .hover-animation {
+        @apply relative after:absolute after:bottom-0 after:left-0 after:h-1 after:w-0 after:bg-(--nav-hover-color) after:transition-all after:duration-300 hover:after:w-full;
+    }
+
+    /*.hover-animation {
+        @apply relative transition-all ease-in-out before:transition-[width] before:ease-in-out before:duration-300 before:absolute before:bg-(--nav-hover-color) before:origin-center before:h-1 before:w-0 hover:before:w-[50%] before:bottom-0 before:left-[50%] after:transition-[width] after:ease-in-out after:duration-300 after:absolute after:bg-(--nav-hover-color) after:origin-center after:h-1 after:w-0 hover:after:w-[50%] after:bottom-0 after:right-[50%];
+    }*/
+}
+
+
+.guest-nav {
+    --nav-hover-color: var(--p-primary-800);
+    @variant dark {
+        --nav-hover-color: var(--p-primary-400);
+    }
+
+    .active-nav {
+        @apply relative after:absolute after:bottom-0 after:left-0 after:h-1 after:w-full after:bg-(--nav-hover-color) after:transition-all after:duration-300;
+    }
+
+    .hover-animation:not(.active-nav) {
+        @apply relative after:absolute after:bottom-0 after:left-0 after:h-1 after:w-0 after:bg-(--nav-hover-color) after:transition-all after:duration-300 hover:after:w-full;
+    }
+}
+
+/*.lucide {
+    width: 16px;
+    height: 16px;
+}*/

@@ -1,0 +1,283 @@
+<script setup>
+import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { Bell, Calendar, Cog, Mail, Users, User, Check, Search, TriangleAlert, CircleX, ArrowUp } from '@lucide/vue';
+import { AppleIcon, FacebookIcon, GoogleIcon, LaravelIcon, GitHubIcon } from 'vue3-simple-icons';
+
+const value = ref(0);
+let interval = null;
+
+function startProgress() {
+    interval = setInterval(() => {
+        let newValue = value.value + Math.floor(Math.random() * 10) + 1;
+        if (newValue >= 100) {
+            newValue = 100;
+        }
+        value.value = newValue;
+    }, 2000);
+}
+
+function endProgress() {
+    clearInterval(interval);
+    interval = null;
+}
+
+onMounted(() => {
+    startProgress();
+});
+
+onBeforeUnmount(() => {
+    endProgress();
+});
+</script>
+
+<template>
+    <div class="columns-1 gap-4 space-y-4 md:columns-2 xl:columns-3">
+        <div class="card break-inside-avoid-column">
+            <div class="mb-4 text-xl font-semibold">ProgressBar</div>
+            <div class="flex flex-col gap-4 md:flex-row">
+                <div class="md:w-1/2">
+                    <ProgressBar :value="value"></ProgressBar>
+                </div>
+                <div class="md:w-1/2">
+                    <ProgressBar :value="50" :showValue="false"></ProgressBar>
+                </div>
+            </div>
+        </div>
+        <div class="card break-inside-avoid-column">
+            <div class="mb-4 text-xl font-semibold">Badge</div>
+            <div class="flex gap-2">
+                <Badge :value="2"></Badge>
+                <Badge :value="8" severity="success"></Badge>
+                <Badge :value="4" severity="info"></Badge>
+                <Badge :value="12" severity="warn"></Badge>
+                <Badge :value="3" severity="danger"></Badge>
+            </div>
+
+            <div class="my-4 font-semibold">Overlay</div>
+            <div class="flex gap-6">
+                <OverlayBadge value="2">
+                    <Bell size="24" />
+                </OverlayBadge>
+                <OverlayBadge value="4" severity="danger">
+                    <Calendar size="24" />
+                </OverlayBadge>
+                <OverlayBadge severity="danger">
+                    <Mail size="24" />
+                </OverlayBadge>
+            </div>
+
+            <div class="my-4 font-semibold">Button</div>
+            <div class="flex gap-2">
+                <Button type="button">Emails<Badge value="8" severity="secondary" /></Button>
+                <Button type="button" variant="outlined"><Users />Messages<Badge value="2" severity="contrast" /></Button>
+            </div>
+
+            <div class="my-4 font-semibold">Sizes</div>
+            <div class="flex items-start gap-2">
+                <Badge value="Small" size="small" />
+                <Badge value="Default" severity="success" />
+                <Badge value="Large" size="large" severity="warn" />
+                <Badge value="XLarge" size="xlarge" severity="danger" />
+            </div>
+        </div>
+        <div class="card break-inside-avoid-column">
+            <div class="mb-4 text-xl font-semibold">Avatar</div>
+            <div class="mb-4 font-semibold">Group</div>
+            <AvatarGroup>
+                <Avatar
+                    :image="'https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png'"
+                    size="large"
+                    shape="circle"></Avatar>
+                <Avatar
+                    :image="'https://primefaces.org/cdn/primevue/images/avatar/asiyajavayant.png'"
+                    size="large"
+                    shape="circle"></Avatar>
+                <Avatar
+                    :image="'https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png'"
+                    size="large"
+                    shape="circle"></Avatar>
+                <Avatar
+                    :image="'https://primefaces.org/cdn/primevue/images/avatar/ionibowcher.png'"
+                    size="large"
+                    shape="circle"></Avatar>
+                <Avatar
+                    :image="'https://primefaces.org/cdn/primevue/images/avatar/xuxuefeng.png'"
+                    size="large"
+                    shape="circle"></Avatar>
+                <Avatar
+                    label="+2"
+                    shape="circle"
+                    size="large"
+                    :style="{ 'background-color': '#00ad14', color: '#ffffff' }"></Avatar>
+            </AvatarGroup>
+
+            <div class="my-4 font-semibold">Label - Circle</div>
+            <Avatar label="P" class="mr-2" size="xlarge" shape="circle"></Avatar>
+            <Avatar
+                label="V"
+                class="mr-2"
+                size="large"
+                :style="{ 'background-color': '#2196F3', color: '#ffffff' }"
+                shape="circle"></Avatar>
+            <Avatar
+                label="U"
+                class="mr-2"
+                :style="{ 'background-color': '#9c27b0', color: '#ffffff' }"
+                shape="circle"></Avatar>
+
+            <div class="my-4 font-semibold">Icon - Badge</div>
+            <OverlayBadge value="4" severity="danger" class="inline-flex">
+                <Avatar label="U" size="xlarge" />
+            </OverlayBadge>
+        </div>
+        <div class="card break-inside-avoid-column">
+            <div class="mb-4 text-xl font-semibold">Tag</div>
+            <div class="mb-4 font-semibold">Default</div>
+            <div class="flex flex-wrap gap-2">
+                <Tag value="Primary"></Tag>
+                <Tag severity="secondary" value="Secondary"></Tag>
+                <Tag severity="success" value="Success"></Tag>
+                <Tag severity="info" value="Info"></Tag>
+                <Tag severity="warn" value="Warn"></Tag>
+                <Tag severity="danger" value="Danger"></Tag>
+                <Tag severity="contrast" value="Contrast"></Tag>
+            </div>
+
+            <div class="my-4 font-semibold">Pills</div>
+            <div class="flex flex-wrap gap-2">
+                <Tag value="Primary" rounded></Tag>
+                <Tag severity="secondary" value="Secondary" rounded></Tag>
+                <Tag severity="success" value="Success" rounded></Tag>
+                <Tag severity="info" value="Info" rounded></Tag>
+                <Tag severity="warn" value="Warn" rounded></Tag>
+                <Tag severity="danger" value="Danger" rounded></Tag>
+                <Tag severity="contrast" value="Contrast" rounded></Tag>
+            </div>
+
+            <div class="my-4 font-semibold">Icons</div>
+            <div class="flex flex-wrap gap-2">
+                <Tag>
+                    <User />
+                    Primary
+                </Tag>
+                <Tag severity="secondary">
+                    <User />
+                    Secondary
+                </Tag>
+                <Tag severity="success">
+                    <Check />
+                    Success
+                </Tag>
+                <Tag severity="info">
+                    <Search />
+                    Info
+                </Tag>
+                <Tag severity="warn">
+                    <TriangleAlert />
+                    Warn
+                </Tag>
+                <Tag severity="danger">
+                    <CircleX />
+                    Danger
+                </Tag>
+                <Tag severity="contrast">
+                    <Cog />
+                    Contrast
+                </Tag>
+            </div>
+        </div>
+        <div class="card break-inside-avoid-column">
+            <div class="mb-4 text-xl font-semibold">Chip</div>
+            <div class="mb-4 font-semibold">Basic</div>
+            <div class="flex flex-wrap items-center">
+                <Chip label="Action" class="mr-2 mb-2"></Chip>
+                <Chip label="Comedy" class="mr-2 mb-2"></Chip>
+                <Chip label="Mystery" class="mr-2 mb-2"></Chip>
+                <Chip label="Thriller" :removable="true" class="mb-2"></Chip>
+            </div>
+
+            <div class="my-4 font-semibold">Icon</div>
+            <div class="flex flex-wrap items-center gap-2">
+                <Chip label="Apple">
+                    <template #icon>
+                        <AppleIcon size="18px" />
+                    </template>
+                </Chip>
+                <Chip label="Facebook">
+                    <template #icon>
+                        <FacebookIcon size="18px" />
+                    </template>
+                </Chip>
+                <Chip label="Google">
+                    <template #icon>
+                        <GoogleIcon size="18px" />
+                    </template>
+                </Chip>
+                <Chip label="Laravel">
+                    <template #icon>
+                        <LaravelIcon size="18px" />
+                    </template>
+                </Chip>
+                <Chip label="GitHub" removable>
+                    <template #icon>
+                        <GitHubIcon size="18px" />
+                    </template>
+                </Chip>
+            </div>
+
+            <div class="my-4 font-semibold">Image</div>
+            <div class="flex flex-wrap items-center gap-2">
+                <Chip
+                    label="Amy Elsner"
+                    :image="'https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png'"></Chip>
+                <Chip
+                    label="Asiya Javayant"
+                    :image="'https://primefaces.org/cdn/primevue/images/avatar/asiyajavayant.png'"></Chip>
+                <Chip
+                    label="Onyama Limba"
+                    :image="'https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png'"></Chip>
+            </div>
+        </div>
+        <div class="card break-inside-avoid-column">
+            <div class="mb-4 text-xl font-semibold">Skeleton</div>
+            <div class="rounded-border border-surface border p-6">
+                <div class="mb-4 flex">
+                    <Skeleton shape="circle" size="4rem" class="mr-2"></Skeleton>
+                    <div>
+                        <Skeleton width="10rem" class="mb-2"></Skeleton>
+                        <Skeleton width="5rem" class="mb-2"></Skeleton>
+                        <Skeleton height=".5rem"></Skeleton>
+                    </div>
+                </div>
+                <Skeleton width="100%" height="150px"></Skeleton>
+                <div class="mt-4 flex justify-between">
+                    <Skeleton width="4rem" height="2rem"></Skeleton>
+                    <Skeleton width="4rem" height="2rem"></Skeleton>
+                </div>
+            </div>
+        </div>
+        <div class="card break-inside-avoid-column">
+            <div class="mb-4 text-xl font-semibold">ScrollTop</div>
+            <ScrollPanel class="h-[200px] max-w-[250px]">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Vitae et leo duis ut diam. Ultricies mi quis hendrerit dolor magna eget est
+                    lorem. Amet consectetur adipiscing elit ut. Nam libero justo laoreet sit amet. Pharetra massa massa
+                    ultricies mi quis hendrerit dolor magna. Est ultricies integer quis auctor elit sed vulputate.
+                    Consequat ac felis donec et. Tellus orci ac auctor augue mauris. Semper feugiat nibh sed pulvinar
+                    proin gravida hendrerit lectus a. Tincidunt arcu non sodales neque sodales. Metus aliquam eleifend
+                    mi in nulla posuere sollicitudin aliquam ultrices. Sodales ut etiam sit amet nisl purus. Cursus sit
+                    amet dictum sit amet. Tristique senectus et netus et malesuada fames ac turpis egestas. Et tortor
+                    consequat id porta nibh venenatis cras sed. Diam maecenas ultricies mi eget mauris. Eget egestas
+                    purus viverra accumsan in nisl nisi. Suscipit adipiscing bibendum est ultricies integer. Mattis
+                    aliquam faucibus purus in massa tempor nec.
+                </p>
+                <ScrollTop target="parent" :threshold="100" :buttonProps="{ severity: 'contrast', raised: true, rounded: true, iconOnly: true }">
+                    <template #icon>
+                        <ArrowUp />
+                    </template>
+                </ScrollTop>
+            </ScrollPanel>
+        </div>
+    </div>
+</template>

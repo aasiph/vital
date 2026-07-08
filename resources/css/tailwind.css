@@ -1,0 +1,28 @@
+@import 'tailwindcss';
+@import 'tailwindcss-primeui';
+
+@source '../../resources/views/**/*.blade.php';
+@source '../../resources/js/**/*.vue';
+
+@custom-variant dark (&:is(.dark *));
+
+@layer base {
+    button:not(:disabled),
+    [role='button']:not(:disabled) {
+        cursor: pointer;
+    }
+
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-surface-200, currentColor);
+    }
+}
+
+@theme {
+    --font-sans:
+        'Nunito', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+}
