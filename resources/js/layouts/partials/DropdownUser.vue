@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { Link, router, usePage } from '@inertiajs/vue3';
-import { User, LogOut, LogIn } from '@lucide/vue';
+import { User, LogOut, LogIn, LayoutDashboard } from '@lucide/vue';
 import { ref } from 'vue';
 import { useCurrentUrl } from '@/composables/useCurrentUrl';
 import { MD5 } from '@/helpers';
-import { login, logout } from '@/routes';
+import { login, logout, dashboard } from '@/routes';
 import { edit } from '@/routes/profile';
 
 const page = usePage();
@@ -12,12 +12,20 @@ const menu = ref();
 const { isCurrentUrl } = useCurrentUrl();
 const items = ref([
     {
+        label: 'Dashboard',
+        icon: LayoutDashboard,
+        command: () => {
+            router.get(dashboard().url);
+        },
+    },
+    {
         label: 'Profile',
         icon: User,
         command: () => {
             router.get(edit().url);
         },
     },
+    { separator: true },
     {
         label: 'Log Out',
         icon: LogOut,
@@ -32,12 +40,9 @@ const toggle = (event: any) => {
 };
 
 function gravatar_url() {
-    return (
-        'https://www.gravatar.com/avatar/' +
-        MD5(page.props.auth.user.email) +
-        '?s=32&d=initials&name=' +
-        encodeURIComponent(page.props.auth.user.name)
-    );
+    const fallbackUrl = `https://ui-avatars.com/api/${encodeURIComponent(page.props.auth.user.name)}/32/848884/ffffff`;
+
+    return `https://www.gravatar.com/avatar/${MD5(page.props.auth.user.email)}?s=32&d=${encodeURIComponent(fallbackUrl)}`;
 }
 </script>
 

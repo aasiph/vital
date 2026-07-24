@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { Head, useForm } from '@inertiajs/vue3';
 import Logo from '@/icons/Logo.vue';
-import AuthLayout from '@/layouts/AuthLayout.vue';
+import GuestLayout from '@/layouts/GuestLayout.vue';
 import { confirm } from "@/routes/password";
 
 defineOptions({
-    layout: AuthLayout,
+    layout: GuestLayout,
 });
 
 const form = useForm({
@@ -48,7 +48,6 @@ const submit = () => {
                     class="w-full"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
-                    size="small"
                     type="submit">
                     Confirm
                 </Button>

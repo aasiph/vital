@@ -135,6 +135,8 @@ function makeMenuItem(menu: MenuItem, path: string, level: number) {
 }
 const toggleButtonNode = h(Button, {
         class: 'lg:invisible',
+        severity: 'secondary',
+        rounded: true,
         iconOnly: true,
         onClick() {
             menuToggle();
@@ -142,11 +144,13 @@ const toggleButtonNode = h(Button, {
     },
     () => h(ChevronLeft)
 );
-const homeRouteNode = h(Link, { href: home().url }, () => h(Logo, { class: 'w-full h-3 dark:fill-primary-300'}));
+const appLogo = h(Logo, { class: 'w-full h-8 w-8 dark:fill-surface-100' });
+const appName = h('span', { class: 'font-bold text-xl'}, page.props.name);
+const homeRouteNode = h(Link, { href: home().url, class: 'flex items-center gap-2' }, () => [appLogo, appName]);
 const toggleMenuNode = h(
     'div',
     {
-        class: 'flex items-center justify-between h-[4rem] px-4 py-4 shrink-0 lg:hidden',
+        class: 'flex items-center justify-between h-[4rem] px-4 py-4 shrink-0 lg:hidden shadow-xs dark:shadow-surface-700',
     },
     [homeRouteNode, toggleButtonNode]
 );

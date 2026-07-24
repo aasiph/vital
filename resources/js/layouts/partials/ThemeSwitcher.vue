@@ -509,7 +509,7 @@ updateSurfacePalette(color.palette);
             }"
             type="button"
             class="bg-surface-100 dark:bg-surface-900 flex h-7 w-7 items-center justify-center rounded-md p-0">
-            <Palette />
+            <Palette :size="18" />
         </button>
         <div
             class="bg-surface-0 dark:bg-surface-900 border-surface-200 dark:border-surface-700 absolute top-[2.5rem] right-0 z-10 flex hidden w-[16rem] origin-top flex-col gap-3.5 rounded-md border p-2 shadow-sm">

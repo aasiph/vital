@@ -10,52 +10,46 @@ const props = withDefaults(
         iconMode: false,
     }
 );
-const { updateAppearance, appearance } = useAppearance();
+const { updateAppearance, appearance, toggleDark, isDarkMode } = useAppearance();
 
-function getLabel(item: string): string {
-    if (!props.iconMode) {
-        switch (item) {
-            case 'L':
-                return 'Light';
-            case 'D':
-                return 'Dark';
-            case 'S':
-                return 'System';
-        }
-    }
-
-    return '';
-}
 </script>
 
 <template>
-    <div class="inline-flex flex-col items-start justify-start gap-2 pr-4">
-        <span class="text-xs font-medium" v-if="!iconMode">Appearance</span>
-        <div class="flex gap-0.5">
+    <div v-if="!props.iconMode" class="flex flex-col w-full gap-2">
+        <span class="text-xs font-medium">Appearance</span>
+        <div class="space-x-1">
             <Button
                 :severity="appearance == 'light' ? 'primary' : 'secondary'"
                 size="small"
                 @click="updateAppearance('light')"
                 :pt:root="'!px-2'">
-                <Sun />
-                {{ getLabel('L') }}
+                <Sun :size="16" />
+                Light
             </Button>
             <Button
                 :severity="appearance == 'dark' ? 'primary' : 'secondary'"
                 size="small"
                 @click="updateAppearance('dark')"
                 :pt:root="'!px-2'">
-                <Moon />
-                {{ getLabel('D') }}
+                <Moon fill="#ffffff" :size="16" />
+                Dark
             </Button>
             <Button
                 :severity="appearance == 'system' ? 'primary' : 'secondary'"
                 size="small"
                 @click="updateAppearance('system')"
                 :pt:root="'!px-2'">
-                <Monitor />
-                {{ getLabel('S') }}
+                <Monitor :size="16" />
+                System
             </Button>
         </div>
+    </div>
+    <div v-else>
+        <Button :severity="!isDarkMode ? 'secondary' : 'secondary'"
+                @click="toggleDark" size="small" :pt:root="'!p-0'" variant="outlined"
+                class="h-8 w-8">
+            <Moon v-if="isDarkMode" fill="#ffffff" :size="18" />
+            <Sun v-else :size="18" />
+        </Button>
     </div>
 </template>

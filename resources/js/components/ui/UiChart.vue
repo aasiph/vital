@@ -1,6 +1,7 @@
 <script setup>
 import { useAppearance } from '@/composables/useAppearance.js';
 import { onMounted, ref, watch } from 'vue';
+import { getActiveColor } from '@/helpers';
 
 const { getPrimary, getSurface, isDarkMode } = useAppearance();
 const lineData = ref(null);
@@ -20,9 +21,9 @@ onMounted(() => {
 
 function setColorOptions() {
     const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--p-text-color');
-    const textColorSecondary = documentStyle.getPropertyValue('--p-text-muted-color');
-    const surfaceBorder = documentStyle.getPropertyValue('--p-content-border-color');
+    const textColor = getActiveColor('--p-text-color');
+    const textColorSecondary = getActiveColor('--p-text-muted-color');
+    const surfaceBorder = getActiveColor('--p-content-border-color');
 
     barData.value = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],

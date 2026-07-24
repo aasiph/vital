@@ -206,11 +206,8 @@ function calculateCustomerTotal(name: string) {
                 <Column header="Country" filterField="country.name" style="min-width: 12rem">
                     <template #body="{ data }: { data: Customer }">
                         <div class="flex items-center gap-2">
-                            <img
-                                alt="flag"
-                                src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
-                                :class="`flag flag-${data.country.code}`"
-                                style="width: 24px" />
+                            <span
+                                :class="`fi fi-${data.country.code.toLowerCase()}`" />
                             <span>{{ data.country.name }}</span>
                         </div>
                     </template>
@@ -461,11 +458,8 @@ function calculateCustomerTotal(name: string) {
                 <Column field="country" header="Country" style="min-width: 200px">
                     <template #body="{ data }: { data: Customer }">
                         <div class="flex items-center gap-2">
-                            <img
-                                alt="flag"
-                                src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
-                                :class="`flag flag-${data.country.code}`"
-                                style="width: 24px" />
+                            <span
+                                :class="`fi fi-${data.country.code.toLowerCase()}`" />
                             <span>{{ data.country.name }}</span>
                         </div>
                     </template>

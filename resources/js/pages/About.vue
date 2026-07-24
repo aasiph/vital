@@ -25,7 +25,7 @@ const skills = [
     <Head title="Page" />
 
     <!-- Main Content -->
-    <main class="flex flex-col gap-12 lg:gap-20">
+    <main class="container flex flex-col gap-12 lg:gap-20">
         <!-- Hero Section -->
         <section
             class="from-primary-700 via-primary-600 to-primary-700 flex flex-col items-center justify-center rounded-2xl bg-gradient-to-b py-20 text-center text-white">

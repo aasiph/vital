@@ -2,12 +2,12 @@
 import { Head, useForm } from '@inertiajs/vue3';
 import SimpleLink from '@/components/SimpleLink.vue';
 import ForgotSvg from '@/icons/ForgotSvg.vue';
-import AuthLayout from '@/layouts/AuthLayout.vue';
+import GuestLayout from '@/layouts/GuestLayout.vue';
 import { login } from "@/routes";
 import { email } from "@/routes/password";
 
 defineOptions({
-    layout: AuthLayout,
+    layout: GuestLayout,
 });
 
 defineProps<{
@@ -56,7 +56,6 @@ const submit = () => {
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                     label="Email Password Reset Link"
-                    size="small"
                     type="submit" />
             </div>
         </form>

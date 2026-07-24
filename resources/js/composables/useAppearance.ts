@@ -123,6 +123,14 @@ export function useAppearance() {
     const getPrimary = computed(() => layoutConfig.primary);
     const getSurface = computed(() => layoutConfig.surface);
 
+    const toggleDark = () => {
+        if(isDarkMode.value){
+            updateAppearance('light');
+        } else {
+            updateAppearance('dark');
+        }
+    }
+
     return {
         appearance,
         updateAppearance,
@@ -133,5 +141,6 @@ export function useAppearance() {
         isSidebarActive,
         getPrimary,
         getSurface,
+        toggleDark
     };
 }

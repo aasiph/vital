@@ -121,9 +121,8 @@ function searchCountry(event) {
                         v-for="option of slotProps.value"
                         :key="option.code">
                             <span
-                                :class="'flag flag- mr-2' + option.code.toLowerCase()"
-                                style="width: 18px; height: 12px" />
-                        <div>{{ option.name }}</div>
+                                :class="`fi fi-${slotProps.option.code.toLowerCase()} mr-2`"></span>
+                        <span>{{ option.name }}</span>
                     </div>
                     <template v-if="!slotProps.value || slotProps.value.length === 0">
                         <div class="p-1">Select Countries</div>
@@ -132,9 +131,8 @@ function searchCountry(event) {
                 <template #option="slotProps">
                     <div class="flex items-center">
                             <span
-                                :class="'flag flag- mr-2' + slotProps.option.code.toLowerCase()"
-                                style="width: 18px; height: 12px" />
-                        <div>{{ slotProps.option.name }}</div>
+                                :class="`fi fi-${slotProps.option.code.toLowerCase()} mr-2`" />
+                        <span>{{ slotProps.option.name }}</span>
                     </div>
                 </template>
             </MultiSelect>

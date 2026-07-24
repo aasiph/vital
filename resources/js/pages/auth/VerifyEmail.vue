@@ -3,12 +3,12 @@ import { Head, useForm } from '@inertiajs/vue3';
 import { computed } from 'vue';
 import SimpleLink from '@/components/SimpleLink.vue';
 import Logo from '@/icons/Logo.vue';
-import AuthLayout from '@/layouts/AuthLayout.vue';
+import GuestLayout from '@/layouts/GuestLayout.vue';
 import { logout } from "@/routes";
 import { send } from "@/routes/verification";
 
 defineOptions({
-    layout: AuthLayout,
+    layout: GuestLayout,
 });
 
 const props = defineProps<{
@@ -47,7 +47,6 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                     label="Resend Verification Email"
-                    size="small"
                     type="submit" />
                 <SimpleLink :url="logout().url" as="button" method="post">Log Out</SimpleLink>
             </div>

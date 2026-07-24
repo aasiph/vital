@@ -3,10 +3,12 @@ import { Link, usePage } from '@inertiajs/vue3';
 import { useWindowScroll } from '@vueuse/core';
 import { computed, ref } from 'vue';
 import { useCurrentUrl } from '@/composables/useCurrentUrl';
+import { isDev } from '@/helpers';
 import Logo from '@/icons/Logo.vue';
+import DarkmodeSwitch from '@/layouts/partials/DarkmodeSwitch.vue';
 import ThemeSwitcher from '@/layouts/partials/ThemeSwitcher.vue';
 import { home } from "@/routes";
-import { about } from "@/routes/pages/index";
+import { about, services } from '@/routes/pages';
 import DropdownUser from './DropdownUser.vue';
 
 const { y } = useWindowScroll();
@@ -23,7 +25,7 @@ const get_header_class = computed(() => {
 const navlinks = computed(() => {
     return [
         { title: 'Home', href: '/', isActive: isCurrentUrl(home().url) },
-        { title: 'Services', href: '/#services', isActive: false },
+        { title: 'Services', href: '/#services', isActive: isCurrentUrl(services().url) },
         { title: 'Technology', href: '/#technology', isActive: false },
         { title: 'About', href: '/pages/about', isActive: isCurrentUrl(about().url) },
     ];
@@ -48,13 +50,14 @@ const navlinks = computed(() => {
                     <ul
                         class="guest-nav flex items-center space-x-4 text-lg font-semibold text-primary-600 uppercase lg:space-x-8 dark:text-primary-400">
                         <li v-for="link in navlinks" :key="link.href" class="hover-animation" :class="{ 'active-nav': link.isActive }">
-                            <span v-if="link.isActive">{{ link.title }}</span>
+                            <span v-if="link.isActive" class="cursor-pointer">{{ link.title }}</span>
                             <a v-else :href="link.href">{{ link.title }}</a>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="flex items-center gap-1">
+                <DarkmodeSwitch icon-mode v-if="isDev()" />
                 <ThemeSwitcher :enable-menu-mode-switch="false" />
                 <DropdownUser />
             </div>

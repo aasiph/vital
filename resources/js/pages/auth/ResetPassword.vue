@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { Head, useForm } from '@inertiajs/vue3';
 import Logo from '@/icons/Logo.vue';
-import AuthLayout from '@/layouts/AuthLayout.vue';
+import GuestLayout from '@/layouts/GuestLayout.vue';
 import { update } from '@/routes/password';
 
 defineOptions({
-    layout: AuthLayout,
+    layout: GuestLayout,
 });
 
 const props = defineProps<{
@@ -72,7 +72,6 @@ const submit = () => {
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                     label="Reset Password"
-                    size="small"
                     type="submit" />
             </div>
         </form>

@@ -3,7 +3,7 @@ import { ShoppingCart, DollarSign, Users, MessageSquareText } from '@lucide/vue'
 </script>
 <template>
     <div class="col-span-12 lg:col-span-6 xl:col-span-3">
-        <div class="card mb-0 bg-white">
+        <div class="card mb-0 bg-white space-x-1">
             <div class="mb-4 flex justify-between">
                 <div>
                     <span class="text-muted-color mb-4 block font-medium">Orders</span>
@@ -20,7 +20,7 @@ import { ShoppingCart, DollarSign, Users, MessageSquareText } from '@lucide/vue'
         </div>
     </div>
     <div class="col-span-12 lg:col-span-6 xl:col-span-3">
-        <div class="card mb-0">
+        <div class="card mb-0 space-x-1">
             <div class="mb-4 flex justify-between">
                 <div>
                     <span class="text-muted-color mb-4 block font-medium">Revenue</span>
@@ -37,7 +37,7 @@ import { ShoppingCart, DollarSign, Users, MessageSquareText } from '@lucide/vue'
         </div>
     </div>
     <div class="col-span-12 lg:col-span-6 xl:col-span-3">
-        <div class="card mb-0">
+        <div class="card mb-0 space-x-1">
             <div class="mb-4 flex justify-between">
                 <div>
                     <span class="text-muted-color mb-4 block font-medium">Customers</span>
@@ -54,7 +54,7 @@ import { ShoppingCart, DollarSign, Users, MessageSquareText } from '@lucide/vue'
         </div>
     </div>
     <div class="col-span-12 lg:col-span-6 xl:col-span-3">
-        <div class="card mb-0">
+        <div class="card mb-0 space-x-1">
             <div class="mb-4 flex justify-between">
                 <div>
                     <span class="text-muted-color mb-4 block font-medium">Comments</span>

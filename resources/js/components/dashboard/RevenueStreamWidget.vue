@@ -1,10 +1,11 @@
-<script setup>
-import { useAppearance } from '@/composables/useAppearance.js';
+<script setup lang="ts">
 import { onMounted, ref, watch } from 'vue';
+import { useAppearance } from '@/composables/useAppearance.js';
+import { getActiveColor } from '@/helpers';
 
 const { getPrimary, getSurface, isDarkMode } = useAppearance();
-const chartData = ref(null);
-const chartOptions = ref(null);
+const chartData = ref<Record<string, any>>({});
+const chartOptions = ref<Record<string, any>>({});
 
 function setChartData() {
     const documentStyle = getComputedStyle(document.documentElement);
@@ -43,9 +44,8 @@ function setChartData() {
 }
 
 function setChartOptions() {
-    const documentStyle = getComputedStyle(document.documentElement);
-    const borderColor = documentStyle.getPropertyValue('--p-content-border-color');
-    const textMutedColor = documentStyle.getPropertyValue('--p-text-muted-color');
+    const borderColor = getActiveColor('--p-content-border-color');
+    const textMutedColor = getActiveColor('--p-text-muted-color');
 
     return {
         maintainAspectRatio: false,

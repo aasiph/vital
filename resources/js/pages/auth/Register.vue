@@ -3,11 +3,11 @@ import { Head, useForm } from '@inertiajs/vue3';
 import SimpleLink from '@/components/SimpleLink.vue';
 import AuthRegisterLogo from '@/icons/AuthRegisterLogo.vue';
 import Logo from '@/icons/Logo.vue';
-import AuthLayout from '@/layouts/AuthLayout.vue';
+import GuestLayout from '@/layouts/GuestLayout.vue';
 import { login, register } from "@/routes";
 
 defineOptions({
-    layout: AuthLayout,
+    layout: GuestLayout,
 });
 
 const form = useForm({
@@ -74,22 +74,21 @@ const submit = () => {
                         :class="form.errors.password_confirmation ? '!border-red-300' : ''" />
                     <FormError :message="form.errors.password_confirmation" />
                 </div>
-                <div class="flex items-center justify-between gap-2">
-                    <div class="flex gap-2">
-                        <p class="text-sm text-gray-500">Already registered?</p>
-                        <SimpleLink :url="login().url">Login Here</SimpleLink>
-                    </div>
+                <div class="flex flex-col items-stretch justify-between gap-4">
                     <Button
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing"
                         label="Register"
-                        size="small"
                         type="submit" />
+                    <div class="flex gap-2">
+                        <p class="text-sm text-gray-500">Already registered?</p>
+                        <SimpleLink :url="login().url">Login Here</SimpleLink>
+                    </div>
                 </div>
             </form>
         </div>
-        <div class="bg-surface-100 dark:bg-surface-800 hidden w-[400px] items-end sm:flex">
-            <AuthRegisterLogo class="-ml-6 h-full w-full" />
+        <div class="bg-surface-100 dark:bg-surface-800 hidden w-[400px] sm:flex px-4">
+            <AuthRegisterLogo class="h-full w-full" />
         </div>
     </div>
 </template>

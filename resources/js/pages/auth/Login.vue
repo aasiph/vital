@@ -3,17 +3,18 @@ import { Head, useForm } from '@inertiajs/vue3';
 import SimpleLink from '@/components/SimpleLink.vue';
 import AuthLogo from '@/icons/AuthLogo.vue';
 import Logo from '@/icons/Logo.vue';
-import AuthLayout from '@/layouts/AuthLayout.vue';
+import GuestLayout from '@/layouts/GuestLayout.vue';
 import { login, register } from "@/routes";
 import { request } from "@/routes/password";
 
 defineOptions({
-    layout: AuthLayout,
+    layout: GuestLayout,
 });
 
 defineProps<{
     canResetPassword?: boolean;
     status?: string;
+    canRegister?: boolean;
 }>();
 
 const form = useForm({
@@ -81,9 +82,8 @@ const submit = () => {
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                     label="Log in"
-                    size="small"
                     type="submit" />
-                <div class="flex gap-2">
+                <div v-if="canRegister" class="flex gap-2">
                     <p class="text-sm text-gray-500">Don't have an account?</p>
                     <SimpleLink :url="register().url">Signup Here</SimpleLink>
                 </div>

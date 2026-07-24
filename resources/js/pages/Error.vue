@@ -1,13 +1,13 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import Error400 from '@/assets/errors/400.svg';
 import Error403 from '@/assets/errors/403.svg';
 import Error404 from '@/assets/errors/404.svg';
 import Error500 from '@/assets/errors/500.svg';
 import ErrorCommon from '@/assets/errors/error.svg';
 import FloatingConfigurator from '@/components/FloatingConfigurator.vue';
-import { computed } from 'vue';
 
-defineOptions({ layout: '' });
+defineOptions({ layout: '' as any });
 const props = defineProps<{
     status: number;
 }>();

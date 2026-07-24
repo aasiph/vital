@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { useAppearance } from '@/composables/useAppearance';
 
-const { layoutConfig } = useAppearance();
+const { layoutConfig, layoutState } = useAppearance();
 
 const menuMode = ref(layoutConfig.menuMode);
 const menuModeOptions = ref([
@@ -12,6 +12,10 @@ const menuModeOptions = ref([
 
 function onMenuModeChange() {
     layoutConfig.menuMode = menuMode.value;
+
+    if (menuMode.value === 'static') {
+        layoutState.staticMenuDesktopInactive = false;
+    }
 }
 </script>
 

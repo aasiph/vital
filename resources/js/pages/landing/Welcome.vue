@@ -12,7 +12,7 @@ import ServiceCard from '@/pages/landing/partials/ServiceCard.vue';
 import TrustedClients from '@/pages/landing/partials/TrustedClients.vue';
 
 defineOptions({
-    layout: '',
+    layout: '' as any,
 });
 
 defineProps({
@@ -70,7 +70,6 @@ onMounted(() => {
                 current = section.getAttribute('id')!;
             }
         });
-        console.log(navLi.length);
         navLi.forEach((li) => {
             li.classList.remove('active-nav');
             li.classList.add('hover-animation');
@@ -82,7 +81,7 @@ onMounted(() => {
     };
     window.scrollTo(0, 1);
 
-    const techSwiper = new Swiper('.techSwiper', {
+    new Swiper('.techSwiper', {
         modules: [Autoplay, EffectCube],
         direction: 'vertical',
         loop: true,
@@ -234,6 +233,13 @@ onMounted(() => {
                             </template>
                         </ServiceCard>
                     </div>
+                    <div class="mt-4 lg:mt-8 text-center">
+                        <Button
+                            as="a"
+                            href="/pages/services"
+                            label="More About Services"
+                            type="button" />
+                    </div>
                 </div>
             </section>
 
@@ -248,8 +254,7 @@ onMounted(() => {
                         <span class="text-3xl md:text-4xl">Frameworks, Libraries & Tools Used</span>
                     </div>
                     <div class="flex flex-wrap justify-center gap-6">
-                        <div
-                            v-for="framework of frameworks"
+                        <div v-for="framework of frameworks" :key="framework.name"
                             class="w-[210px] rounded-lg border border-surface-500 bg-surface-500/40 p-2 sm:w-[250px] sm:p-5">
                             <div class="flex items-center gap-1 sm:gap-3">
                                 <div

@@ -3,6 +3,7 @@
 @import './variables.css';
 @import './core.css';
 @import './layout.css';
+@import 'flag-icons/css/flag-icons.min.css';
 
 .bg-hero {
     --c1: var(--p-primary-50);
@@ -44,10 +45,7 @@
 }
 
 .landing-nav {
-    --nav-hover-color: var(--p-primary-800);
-    @variant dark {
-        --nav-hover-color: var(--p-primary-400);
-    }
+    --nav-hover-color: var(--p-primary-500);
 
     .active-nav {
         @apply relative after:absolute after:bottom-0 after:left-0 after:h-1 after:w-full after:bg-(--nav-hover-color) after:transition-all after:duration-300;
