@@ -37,3 +37,6 @@ composer run dev
     - [axios](https://axios-http.com/)
     - [primevue](https://primevue.org/)
 - **[Tailwind CSS 4](https://tailwindcss.com/)**
+
+### License
+This project is open-sourced software licensed under the [MIT license](LICENSE.md).
