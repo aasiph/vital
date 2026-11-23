@@ -1,0 +1,105 @@
+<script setup lang="ts">
+import { Head, useForm } from '@inertiajs/vue3';
+import { Eye, EyeOff, Lock } from '@lucide/vue';
+import InputPassword from 'primevue/inputpassword';
+import { ref } from 'vue';
+import SimpleLink from '@/components/SimpleLink.vue';
+import AuthLogo from '@/icons/AuthLogo.vue';
+import Logo from '@/icons/Logo.vue';
+import GuestLayout from '@/layouts/GuestLayout.vue';
+import { login, register } from "@/routes";
+import { request } from "@/routes/password";
+
+defineOptions({
+    layout: GuestLayout,
+});
+
+defineProps<{
+    canResetPassword?: boolean;
+    status?: string;
+    canRegister?: boolean;
+}>();
+
+const form = useForm({
+    email: 'test@example.com',
+    password: '12345678',
+    remember: true,
+});
+const mask = ref(true);
+
+const submit = () => {
+    form.post(login().url, {
+        onFinish: () => {
+            form.reset('password');
+        },
+    });
+};
+</script>
+<template>
+    <Head title="Log in" />
+    <div
+        class="bg-surface-50 dark:bg-surface-900 dark:border-surface-800 flex w-full flex-col rounded-lg border shadow-md sm:w-auto sm:flex-row">
+        <div class="bg-surface-100 dark:bg-surface-800 p-6">
+            <AuthLogo class="fill-primary h-[100px] w-full sm:h-full" />
+        </div>
+        <div class="w-full px-6 py-4 md:max-w-md">
+            <Logo class="dark:fill-surface-100 mx-auto hidden h-10 w-auto sm:block" />
+            <h2 class="text-primary my-6 text-center text-2xl/9 font-bold tracking-tight">Sign in to your account</h2>
+
+            <div v-if="status" class="mb-4 text-xs font-medium text-green-600">
+                {{ status }}
+            </div>
+
+            <form @submit.prevent="submit" class="mt-1 space-y-4">
+                <div class="flex flex-col gap-1">
+                    <label class="label-class" for="email">Email</label>
+                    <InputText
+                        id="email"
+                        type="email"
+                        autofocus
+                        v-model="form.email"
+                        :invalid="!!form.errors.email" />
+                    <FormError :message="form.errors.email" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="label-class" for="password">Password</label>
+                    <IconField>
+                        <InputIcon>
+                            <Lock />
+                        </InputIcon>
+                        <InputPassword
+                            id="password"
+                            v-model="form.password"
+                            :mask="mask"
+                            fluid
+                        />
+                        <InputIcon class="cursor-pointer" @click="mask = !mask">
+                            <Eye v-if="mask" :size="16" />
+                            <EyeOff v-else :size="16" />
+                        </InputIcon>
+                    </IconField>
+                    <FormError :message="form.errors.password" />
+                </div>
+                <div class="flex items-center justify-between gap-2">
+                    <div class="block">
+                        <Checkbox v-model="form.remember" inputId="remember" name="remember" :binary="true" />
+                        <label for="remember" class="ml-2">Remember</label>
+                    </div>
+                    <SimpleLink v-if="canResetPassword" :url="request().url">
+                        Forgot your password?
+                    </SimpleLink>
+                </div>
+                <Button
+                    fluid
+                    :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing"
+                    label="Log in"
+                    type="submit" />
+                <div v-if="canRegister" class="flex gap-2">
+                    <p class="text-sm text-gray-500">Don't have an account?</p>
+                    <SimpleLink :url="register().url">Signup Here</SimpleLink>
+                </div>
+            </form>
+        </div>
+    </div>
+</template>
